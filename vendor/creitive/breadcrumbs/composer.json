@@ -1,0 +1,39 @@
+{
+    "name": "creitive/breadcrumbs",
+    "description": "Simple breadcrumbs class",
+    "keywords":[
+        "breadcrumbs"
+    ],
+    "homepage":"https://github.com/creitive/breadcrumbs",
+    "authors": [
+        {
+            "name": "Milos Levacic",
+            "email": "milos.levacic@creitive.com"
+        },
+        {
+            "name": "Luka Macun",
+            "email": "luka.macun@creitive.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev":{
+        "symfony/dom-crawler": "~2.0",
+        "symfony/css-selector": "~2.0",
+        "phpunit/phpunit": "~4.4",
+        "squizlabs/php_codesniffer": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Creitive\\Breadcrumbs\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Creitive\\Breadcrumbs\\": "tests"
+        }
+    },
+    "minimum-stability": "dev"
+}

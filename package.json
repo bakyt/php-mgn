@@ -1,0 +1,22 @@
+{
+  "name": "test-unlicensed",
+  "version": "1.0.0",
+  "description": "a simple test to see if UNLICENSED is accepted",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --config build/webpack.dev.conf.js",
+    "publish": "ngc -p tsconfig-aot.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Forrest L Norvell <ogd@aoaioxxysz.net>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "laravel-echo": "^1.4.0",
+    "pusher-js": "^4.2.2",
+    "socket.io-client": "^2.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/npm/cli.git"
+  }
+}
