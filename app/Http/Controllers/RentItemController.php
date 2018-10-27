@@ -226,7 +226,6 @@ class RentItemController extends Controller
         }
 
         $category->name = @$category->name[$locale] ? $category->name[$locale] : $category->name['ru'];
-        $title = json_decode($category->name_single)->$locale." ".$title;
         $rent->title = $title;
         $rent->payment_time=trans('rent.'.$category->payment_time);
         $rent->phone_number=json_decode($rent->phone_number);
@@ -247,7 +246,18 @@ class RentItemController extends Controller
         if(!$rent->author) {$rent->delete(); return abort(404);}
         $parent = @$parent[$locale] ? $parent[$locale] : $parent['ru'];
         $rent->market = Market::all()->where('slug', $rent->market)->first();
-        return view('item.view', ['pathway' => [["title" => $parent, "link" => "/category/" . $parent_id], ["title" => $category->name, "link" => "/list/" . $cat_id]], 'title_add'=>$rent->type?trans('rent.sale'):trans('rent.rent'),'title' => $title, 'item' => $rent, 'id'=>$id, 'title_right'=>" (".$rent->address.")", 'Image'=>$rent->images[0], 'category'=>$category]);
+        return view('item.view', [
+            'pathway' => [
+                ["title" => $parent, "link" => "/category/" . $parent_id],
+                ["title" => $category->name, "link" => "/list/" . $cat_id]
+            ],
+            'title_add'=>$rent->type?trans('rent.sale'):trans('rent.rent'),
+            'title' => $title,
+            'item' => $rent,
+            'id'=>$id,
+            'Image'=>$rent->images[0],
+            'category'=>$category
+        ]);
     }
 
     public function createCategorySelector()
@@ -308,7 +318,7 @@ class RentItemController extends Controller
             array_push($address, \request("address_text")?\request("address_text"):-1);
             $features = \request('features');
             $error = false;
-            $categ = GlobalCategory::all(['id', 'features', 'keywords', 'name', 'name_single'])->where('id', '=', $catId)->first();
+            $categ = GlobalCategory::all(['id', 'parent_id', 'features', 'keywords', 'name', 'name_single'])->where('id', '=', $catId)->first();
             if($categ->type and $categ->type != $type+1) return redirect()->back()->withErrors(trans('rent.not_available_category'));
             $keywords = json_decode($categ->keywords, true);
             if(\request()->has('features'))
@@ -445,7 +455,7 @@ class RentItemController extends Controller
             array_push($address, \request("address_text")?\request("address_text"):-1);
             $features = \request('features');
             $error = false;
-            $categ = GlobalCategory::all(['id', 'features', 'keywords', 'name', 'name_single'])->where('id', '=', $item->category)->first();
+            $categ = GlobalCategory::all(['id', 'parent_id', 'features', 'keywords', 'name', 'name_single'])->where('id', '=', $item->category)->first();
             if($categ->type and $categ->type != $type+1) return redirect()->back()->withErrors(trans('rent.not_available_category'));
             $keywords = json_decode($categ->keywords, true);
             if(\request()->has("features")) foreach (json_decode($categ->features)->$locale as $key=>$value){

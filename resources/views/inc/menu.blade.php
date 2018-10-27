@@ -6,7 +6,7 @@
 </div>
 <div class="navbar-custom-menu">
     <div class="pull-right cart-container">
-        <div class="cart-button" data-toggle="modal" data-target="#modal-orders" title="{{ trans('rent.shopping_cart') }}">
+        <div class="cart-button disable-scroll" data-toggle="modal" data-target="#modal-orders" title="{{ trans('rent.shopping_cart') }}">
             <a title="{{ trans('rent.shopping_cart') }}">
                 <span id="cart-quantity" class="label label-danger hidden"></span>
                 <i class="fa fa-shopping-cart"></i>
@@ -14,7 +14,7 @@
         </div>
     </div>
     <ul class="nav navbar-nav">
-        <li class="visible-xs visible-sm search-mobile-open-btn" onclick="$('.search-mobile-container').show()">
+        <li class="visible-xs visible-sm search-mobile-open-btn" onclick="$('.search-mobile-container').show();$('.main-header input[name=query]').focus()">
             <a href="#" title="{{ __('rent.search') }}">
                 <i class="fa fa-search"></i>
             </a>
@@ -53,7 +53,6 @@
                 <!-- The user image in the menu -->
                     <li class="user-header">
                         <img src="/storage/{{ Auth::user()->avatar }}" class="img-circle" alt="User Image">
-
                         <p>
                             {{ Auth::user()->name }}
                             <small>{{ Auth::user()->role->display_name }}</small>
@@ -63,7 +62,7 @@
                     <li class="user-body">
                         <div class="row">
                             <div class="col-xs-3 text-center">
-                                <a href="#" class="form-control" id="message-btn" data-toggle="modal" data-target="#modal-message"><i class="fa fa-envelope"></i> <span id="has-message" class="label label-danger"></span></a>
+                                <a href="#" class="form-control disable-scroll" id="message-btn" data-toggle="modal" data-target="#modal-message"><i class="fa fa-envelope"></i> <span id="has-message" class="label label-danger"></span></a>
                             </div>
                             <div class="col-xs-3 text-center">
                                 <a href="/users/{{ Auth::id() }}#timeline" id="timeline-btn" class="form-control"><i class="fa fa-bell"></i> <span id="has-notice" class="label label-danger"></span></a>

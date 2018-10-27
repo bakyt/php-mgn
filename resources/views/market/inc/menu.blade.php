@@ -1,22 +1,33 @@
+<div class="search-mobile-container">
+    <div class="search-mobile-close-btn" onclick="$('.search-mobile-container').hide()">
+        <i class="fa fa-arrow-left"></i>
+    </div>
+    @widget('SearchMarket')
+</div>
 <div class="navbar-custom-menu">
+    <div class="pull-right cart-container">
+        <div class="cart-button disable-scroll" data-toggle="modal" data-target="#modal-orders" title="{{ trans('rent.shopping_cart') }}">
+            <a title="{{ trans('rent.shopping_cart') }}">
+                <span id="cart-quantity" class="label label-danger hidden"></span>
+                <i class="fa fa-shopping-cart"></i>
+            </a>
+        </div>
+    </div>
     <ul class="nav navbar-nav">
-        <li>
-            <a href="#" class="dropdown-toggle" onclick="setTimeout(function(){$('#searching').focus()},100)" data-toggle="dropdown" aria-expanded="false">
+        <li class="visible-xs search-mobile-open-btn" onclick="$('.search-mobile-container').show();$('.main-header input[name=query]').focus()">
+            <a href="#" title="{{ __('rent.search_market', [$Market->name]) }}">
                 <i class="fa fa-search"></i>
             </a>
-            <div class="dropdown-menu pull-left" style="background:#555299;width: 300px;">
-                <input value="{{ request()->has('query')?request()->get('query'):"" }}" tabindex="0" id="searching" title="{{ trans('rent.search_market', ['name'=>$Market->name]) }}" autocomplete="off" name="query" class="form-control my-search-input dropdown-toggle" placeholder="{{ trans('rent.search_market', ['name'=>$Market->name]) }}" type="search">
-                <div id="my-drop-parameter" onclick="$(this).hide()" style="background: #ffffff" class="dropdown-menu my-drop-parameter scroll"></div>
-                <div class="type-what-to-serach" style="display: none"></div>
-                <div class="search-results" style="display: none"><span class="users-list-date">{{ trans('rent.search_results') }}:</span></div>
-            </div>
         </li>
-        <li>
-                <a href="#" data-toggle="modal" data-target="#modal-orders" title="{{ trans('rent.shopping_cart') }}">
-                    <i class="fa fa-shopping-cart"></i>
-                    <b class="hidden-xs">{{ trans('rent.shopping_cart') }}</b>
-                    <span id="cart-quantity" class="label label-danger hidden"></span>
-                </a>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="{{ trans('app.language') }}">
+                <b>{{ mb_strtoupper(App::getLocale()) }}</b>
+            </a>
+            <ul class="dropdown-menu" style="left:0;width:auto">
+                @foreach(config("app.locales") as $value)
+                    <li><a style="color: #000;" href="?lang={{ $value }}">{{ mb_strtoupper($value) }}</a></li>
+                @endforeach
+            </ul>
         </li>
         <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
@@ -116,16 +127,10 @@
                     <i class="fa fa-plus"></i>
                     <b class="hidden-xs">{{ trans('rent.new_product') }}</b>
                 </a>
-            @else
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="{{ trans('app.language') }}">
-                <b>{{ mb_strtoupper(App::getLocale()) }}</b>
-            </a>
-            <ul class="dropdown-menu" style="left:0;width:auto">
-                @foreach(config("app.locales") as $value)
-                    <li><a style="color: #000;" href="?lang={{ $value }}">{{ mb_strtoupper($value) }}</a></li>
-                @endforeach
-            </ul>
             @endif
         </li>
     </ul>
+</div>
+<div class="hidden-xs">
+    @widget('SearchMarket')
 </div>

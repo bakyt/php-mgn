@@ -2,6 +2,7 @@
 @section('content')
     <form id="form" action="{{ route('market.store', $types) }}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
+        <input type="hidden" name="type_products" value="{{ old('type_products') }}">
     <div class="row">
         <div id="filter">
             <div style="background:#ffffff ;height:auto;position:relative;width: 100%">

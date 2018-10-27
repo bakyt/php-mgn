@@ -101,12 +101,12 @@
                         @endif
                     </div>
                     <div id="sub-cat-result-box-{{ $i }}" class="scrollBody media col-md-6" style="max-height:285px;overflow: auto;display:none;text-align: left"></div>
-                    <div class="col-md-6 hidden-xs">
+                    <div class="col-md-6 hidden-xs hidden-sm">
                         <div id="carousel-example-generic" class="carousel slide" data-interval="3000" data-ride="carousel" style="margin-top:15px;">
 
                             <div class="carousel-inner">
                                 @foreach($category->children as $sub)
-                                    @if(!$sub->icon) @continue @endif
+                                    @if(!$sub->image) @continue @endif
                                     <div class="item">
                                         <img src="/storage/default-images/slider.png" style="background:url('/storage/{{ $sub->image }}') center center transparent no-repeat;background-size: cover">
 

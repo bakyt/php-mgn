@@ -39,7 +39,11 @@ class GlobalCategoryController extends Controller
         $name = json_decode($category->name);
         $category->name = $name->$slocale?$name->$slocale:$name->ru;
         $pathway = $parent?[["title" => json_decode($parent->name)->$slocale, "link" => "/category/" . $parent->id],["title" => $category->name]]:[];
-        return view('category.sublist', ['pathway'=>$pathway,'title_add'=>$category->type?$category->type==1?trans('rent.rent'):trans('rent.sale'):trans('rent.sale_and_rent'), 'title'=>$category->name, "category"=>$category, "categories" => $categories]);
+        return view('category.sublist', [
+            'pathway'=>$pathway,
+            'title'=>$category->name,
+            "category"=>$category,
+            "categories" => $categories]);
     }
     public function create()
     {

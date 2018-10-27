@@ -20,19 +20,18 @@
                     <div class="flat">
                             <div class="flat" style="position:relative;height: 158px; background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ),url('/storage/{{ $ad->images[0] }}') center center; background-size: cover;">
                                 <a href="/view/{{ $ad->id }}" style="position: absolute; top:0;right:0;left:0;bottom:0"></a>
-                                @if(!$ad->state or $ad->state == 1)<div class="bg-green" style="padding:5px;position:absolute;bottom:0;left:0;font-size:10pt;">{{ $ad->updated->diffForHumans() }}</div>@endif
                                 <div class="bg-orange" style="padding:2px;position:absolute;bottom:0;right:0;font-size:14pt;"><b>{{ $ad->price }} {{ (is_numeric($ad->price)?" ".trans('rent.som'):"") }}</b></div>
                                 <div class="bg-purple" style="position:absolute;top:0;right:0;font-size:10pt;padding: 5px;">@if($ad->type) {{ trans('rent.sale') }}@else{{ trans('rent.rent') }}@endif</div>
                                 @if($ad->market)
-                                        <div class="bg-green" style="position:absolute;top:0;left:0;font-size:10pt;padding: 5px;">{{ trans('rent.market') }}</div>
+                                        <div class="bg-primary" style="position:absolute;top:0;left:0;font-size:10pt;padding: 5px;">{{ trans('rent.new') }}</div>
                                     <div data-delivery="{{ trans('rent.delivery') }}: {{ $ad->market->delivery?implode(", ", json_decode($ad->market->delivery)):trans('rent.no_delivery') }}" data-name="{{ $ad->title }}" data-id="{{ $ad->id }}" data-price="{{ $ad->price }}" data-category-name="{{ $cat_tits[$ad->category][0] }}" data-category-id="{{ $ad->category }}" data-market-slug="{{ $ad->market->slug }}" data-market-name="{{ $ad->market->name }}" class="bg-green add-to-cart" style="cursor:pointer;position:absolute;bottom:0;left:0;font-size:10pt;padding: 5px;"><i class="fa fa-shopping-cart"></i> {{ trans('rent.to_cart') }}</div>
                                 @elseif($ad->type and $cat_tits[$ad->category][1])
                                         @if($ad->state==1)
                                             <div class="bg-aqua" style="position:absolute;top:0;left:0;font-size:10pt;padding: 5px;">{{ trans('rent.secondhand') }}</div>
                                         @else
                                             <div class="bg-primary" style="position:absolute;top:0;left:0;font-size:10pt;padding: 5px;">{{ trans('rent.new') }}</div>
-                                        <div data-delivery="{{ trans('rent.delivery') }}: {{ $ad->author->delivery?$ad->author->delivery:trans('rent.no_delivery') }}" data-name="{{ $ad->title }}" data-id="{{ $ad->id }}" data-price="{{ $ad->price }}" data-category-name="{{ $cat_tits[$ad->category][0] }}" data-category-id="{{ $ad->category }}" data-user-id="{{ $ad->author->id }}" data-user-name="{{ $ad->author->name }}" class="bg-green add-to-cart" style="cursor:pointer;position:absolute;bottom:0;left:0;font-size:10pt;padding: 5px;"><i class="fa fa-shopping-cart"></i> {{ trans('rent.to_cart') }}</div>
                                         @endif
+                                            <div data-delivery="{{ trans('rent.delivery') }}: {{ $ad->author->delivery?$ad->author->delivery:trans('rent.no_delivery') }}" data-name="{{ $ad->title }}" data-id="{{ $ad->id }}" data-price="{{ $ad->price }}" data-category-name="{{ $cat_tits[$ad->category][0] }}" data-category-id="{{ $ad->category }}" data-user-id="{{ $ad->author->id }}" data-user-name="{{ $ad->author->name }}" class="bg-green add-to-cart" style="cursor:pointer;position:absolute;bottom:0;left:0;font-size:10pt;padding: 5px;"><i class="fa fa-shopping-cart"></i> {{ trans('rent.to_cart') }}</div>
                                 @endif
                             </div>
                         <div>

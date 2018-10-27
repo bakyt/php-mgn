@@ -9,7 +9,7 @@
     <meta name="description" content="@if(isset($Description)){{ $Description }}@endif">
     <meta name="keywords" content="@if(isset($Keywords)){{ $Keywords }}@endif">
     <meta property="og:title" content="{{ (isset($title_add)?$title_add.": ":"").(isset($title) ? $title.(isset($title_right)?$title_right:"").' - '.setting('site.title') : setting('site.title')) }}">
-    <meta property="og:image" content="@if(isset($Image)){{ 'https://ijara.kg/storage/'.$Image }}@else{{ 'https://ijara.kg/storage/default-images/logo.png' }}@endif">
+    <meta property="og:image" content="@if(isset($Image)){{ route('home').'/storage/'.$Image }}@else{{ 'https://ijara.kg/storage/default-images/logo.png' }}@endif">
     <meta property="og:description" content="@if(isset($Description)){{ $Description }}@endif">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
@@ -150,6 +150,17 @@
         <div id="to-up" class="hidden" style="position: fixed;right:10px;bottom:40px;display: inline-block"><a href="#" class="btn btn-default"><i class="fa fa-angle-double-up"></i></a></div>
         <div class="nothing-was-found" style="display: none">{{ trans('app.nothing_found') }}</div>
         <!-- /.content-wrapper -->
+        <div class="row">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="bottom-container">
+                        <a class="disable-scroll" href="#feedback" onclick="$('#feedback-link').html('<a href=\'{{ url()->current() }}\'>{{ $title }}</a>')">
+                            {{ trans('app.problems_feedback_text') }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <footer class="main-footer">
             <div class="row">
             <div class="container">
@@ -181,7 +192,7 @@
     <script src="{{ asset('js/site.js') }}"></script>
     <script src="{{ asset('js/cart.js') }}"></script>
     <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
-{{--    @if(auth()->check()) <script src="{{ asset('firebase_subscribe.js') }}"></script> @endif--}}
+    @if(auth()->check()) <script src="{{ asset('firebase_subscribe.js') }}"></script> @endif
     <!-- page script -->
 
     <script type="text/javascript">

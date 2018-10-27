@@ -20,9 +20,9 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
-# DO NOT REMOVE THIS LINE AND THE LINES BELOW SSL_REDIRECT:ijara.kg
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW SSL_REDIRECT:megazon.kg
 RewriteEngine on
 RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} ^ijara.kg$
+RewriteCond %{HTTP_HOST} ^megazon.kg$
 RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
-# DO NOT REMOVE THIS LINE AND THE LINES ABOVE SSL_REDIRECT:ijara.kg
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE SSL_REDIRECT:megazon.kg

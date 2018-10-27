@@ -41,7 +41,7 @@
                                         <li>{{ $delivery }}</li>
                                     @endforeach
                                 @else
-                                    Not available
+                                    {{ __('rent.delivery_not_available') }}
                                 @endif
                             </div>
                         </div>
@@ -137,10 +137,10 @@
                     $.post("/{{ $Market->slug }}/getProducts", {"_token":'{{ csrf_token() }}', 'page':page}, function(data){ //or $.ajax, $.get, $.load etc.
                         //load the content to your div
                         if(data){
-                            let check = false;
-                            for(let i=0;i<data.length; i++){
+                            var check = false;
+                            for(var i=0;i<data.length; i++){
                                 check = true;
-                                let product = '<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">\n' +
+                                var product = '<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">\n' +
                                     '                        <div class="flat">\n' +
                                     '\n' +
                                     '                                <div class="flat" style="position:relative;height: 158px; background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ),url(\'/storage/'+data[i].images[0]+'\') center center; background-size: cover;">\n' +

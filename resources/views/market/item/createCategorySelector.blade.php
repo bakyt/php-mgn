@@ -6,7 +6,7 @@
     <div class="row">
         {!! Form::open(['route' => ['market.item.catselect', $Market->slug]]) !!}
         {{ csrf_field() }}
-        <div class="col-md-6">
+        <div class="col-md-6 col-md-offset-3">
             <div class="form-group">
                 <label for="cat-type">{{ trans("rent.choose_category") }}</label>
                 <div class="input-group">
@@ -19,7 +19,7 @@
                         </optgroup>
                     @endforeach
                 </select>
-                    <span class="input-group-btn"><button id="go-create" type="submit" class="btn btn-primary btn-flat"><i class="fa fa-arrow-right"></i></button></span>
+                    <span class="input-group-btn"><button id="go-create" type="submit" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i></button></span>
                 </div>
             </div>
             <div class="from-group">

@@ -8,7 +8,7 @@
     <meta name="description" content="@if(isset($Description)){{ $Description }}@endif">
     <meta name="keywords" content="@if(isset($Keywords)){{ $Keywords }}@endif">
     <meta property="og:title" content="{{ $title." - ".$Market->name }}">
-    <meta property="og:image" content="@if(isset($Image)){{ 'https://ijara.kg/storage/'.$Image }}@else{{ 'https://ijara.kg/storage/'.setting('site.logo') }}@endif">
+    <meta property="og:image" content="@if(isset($Image)){{ route('home').'/storage/'.$Image }}@else{{ 'https://ijara.kg/storage/'.setting('site.logo') }}@endif">
     <meta property="og:description" content="@if(isset($Description)){{ $Description }}@endif">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
@@ -39,6 +39,7 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#555299">
     @yield('before_styles')
+    <link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -134,7 +135,8 @@
                             {{ trim(isset($title)?$title:"") }}
                         </h1>
                         <ol class="breadcrumb" style="padding-right: 15px">
-                            <li><a href="/{{ $Market->slug }}"><i class="fa fa-home"></i> {{ $Market->name }}</a></li>
+                            <li><a href="{{ route('home') }}"><i class="fa fa-home"></i> {{ __('app.home') }}</a></li>
+                            <li><a href="/{{ $Market->slug }}"> {{ $Market->name }}</a></li>
                             @if(isset($pathway)) @foreach($pathway as $way)
                                 @if(@$way['link'])
                                     <li><a href="{{ $way['link'] }}">@if(@$way['icon']) <i class="{{ $way['icon'] }}"></i> @endif {{ $way['title'] }}</a></li>
@@ -191,12 +193,16 @@
 <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase-messaging.js"></script>
 <script src="{{ asset('js/site.js') }}"></script>
 <script src="{{ asset('js/cart.js') }}"></script>
-{{--@if(auth()->check()) <script src="{{ asset('firebase_subscribe.js') }}"></script> @endif--}}
+<script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
+@if(auth()->check()) <script src="{{ asset('firebase_subscribe.js') }}"></script> @endif
 <!-- page script -->
 
 <script type="text/javascript">
     jQuery(window).load(function () {
         $('body').css("overflow", "auto");
+    });
+    $(function () {
+        $(".select2").select2();
     });
     /* Store sidebar state */
     $('.sidebar-toggle').click(function(event) {

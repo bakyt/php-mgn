@@ -2,7 +2,7 @@ $(function () {
     $.get("/timezone/check", {}, function (data) {
         if(!data) $.Nukura.setTimezone();
     });
-    if(!firebase.apps.length) {
+    if(typeof firebase !== 'undefined' && !firebase.apps.length) {
         firebase.initializeApp({
             apiKey: "AIzaSyAZgqIUDL44Ll2J18NcUS5inMw3UwvabbA",
             authDomain: "megazon-kg.firebaseapp.com",
@@ -18,7 +18,7 @@ $(function () {
     $('.double-arrow').on('mouseover', function () {
         this.click();
     });
-    $('a[data-toggle=modal]').on('click', function () {
+    $('.disable-scroll').on('click', function () {
        $('html body').css({
            margin:0,
            height:"100%",
@@ -68,6 +68,10 @@ $(function () {
     //         $("#message-sender").click();
     //     }
     // });
+    var form = $(".searching-group");
+    form.on('submit', function(){
+        $(this).find("input[name=query_1]").val($.Nukura.transWord($(this).find("input[name=query]").val()));
+    });
     var searchBtnOpen = $(".search-mobile-open-btn");
     if(location.href.search('query')>-1 && searchBtnOpen.is(':visible')) $('.search-mobile-container').show();
     $("#message-sender").on("click", function () {
@@ -237,7 +241,7 @@ $(document).ready(function () {
         }
         else {
             $("#contact-toggle").attr("data-widget", "chat-pane-toggle");
-            $('#modal-message').animate({
+            if($('#modal-message').length) $('#modal-message').animate({
                 scrollTop:$('#modal-message').offset().top
             });
         }

@@ -136,4 +136,5 @@ Route::post('{slug}/edit/{id}', 'MarketController@update')->name('market.item.up
 Route::get('{slug}/setting/', 'MarketController@setting')->name('market.setting');
 Route::get('{slug}/list/{id}', 'MarketController@itemList')->name('market.list');
 Route::get('{slug}/view/{id}', 'MarketController@view')->name('market.item.view');
+Route::get('{slug}/search', 'MarketController@search')->name('search.market');
 //!Market

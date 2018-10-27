@@ -27,7 +27,7 @@ class HomeController extends Controller
         $ads = [];
         $cats = [];
         $feats = [];
-        foreach (Category::all()->sortBy('order') as $cat) {
+        foreach (Category::all()->where('active', 1)->sortBy('order') as $cat) {
             if($cat->parent_id) !isset($rent_cat[$cat->parent_id])? $rent_cat[$cat->parent_id]=" or parent_id=".$cat->id:$rent_cat[$cat->parent_id] .= " or parent_id=".$cat->id;
             else array_push($rent, $cat);
         }
@@ -111,10 +111,11 @@ class HomeController extends Controller
                 $parent_category = $session_search_results['category'];
             }
             else {
-                $query = trim($request->get('query'), '-+*');
+                $query = trim(trim(preg_replace("/[+\*.\<.\>.\(.\).\"]/", " ", $request->get('query')), '-')).($request->has('query_1')?" ".$request->get('query_1'):"");
                 foreach (explode(" ", $query) as $word)
-                    if (strpos($word, '-') or strpos($word, '+') or strpos($word, '*'))
+                    if (preg_match("/[-]/", $word))
                         $query = str_replace($word,'"'.$word.'"', $query);
+                if($query and substr($query, -1, 1)!='"') $query = $query."* ";
                 if($query){
                     $parent_category = Category::whereRaw('`id`=? and `active`=1', $request->get('category'))->get()->first();
                     if($request->get('category') and $parent_category) {

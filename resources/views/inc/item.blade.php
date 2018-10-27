@@ -27,7 +27,7 @@
             <div class="item-params">
                 <ul class="item-params-list list-group">
                     <li class="item-params-list-item list-group-item flat">
-                        <span class="item-params-label">{{ trans('rent.price') }}: </span>{{ $item->price }} @if(!isset($item->features['payment_time']) and isset($item->payment_time) and !$item->type) {{ $item->payment_time }} @endif
+                        <span class="item-params-label">{{ trans('rent.price') }}: </span>{{ $item->price }} {{ __('rent.som') }} @if(!isset($item->features['payment_time']) and isset($item->payment_time) and !$item->type) {{ $item->payment_time }} @endif
                     </li>
                     @foreach($item->features as $value)
                         <li class="item-params-list-item list-group-item flat">
@@ -57,7 +57,7 @@
                     </div>
 
                     <span class="progress-description">
-                    <span id="rent-auth-{{ $item->id }}" data-toggle="modal" data-target="#modal-message" onclick="$('#feedback-link').html('<a href=\'/view/{{ $item->id }}\'>{{ $item->title }}</a>');$.Nukura.newMessage('{{ $item->author->id }}', '{{ $item->author->name }}', '/storage/{{ $item->author->avatar }}', '{{ $item->id }}')" class="pull-left cursor-pointer"><i class="fa fa-envelope"></i></span>
+                    <span id="rent-auth-{{ $item->id }}" data-toggle="modal" data-target="#modal-message" onclick="$('#feedback-link').html('<a href=\'/view/{{ $item->id }}\'>{{ $item->title }}</a>');$.Nukura.newMessage('{{ $item->author->id }}', '{{ $item->author->name }}', '/storage/{{ $item->author->avatar }}', '{{ $item->id }}')" class="pull-left cursor-pointer disable-scroll"><i class="fa fa-envelope"></i></span>
                         @if(isset($item->phone_number->whatsapp[0]))<span id="rent-auth-{{ $item->id }}"  class="pull-right cursor-pointer"><a style="color:#ffffff;" target="_blank" href="whatsapp://send?&phone={{ explode(",", $item->phone_number->whatsapp)[0] }}&text=https://ijara.kg/view/{{ $item->id }}"><i class="fa fa-whatsapp"></i> Whatsapp <i class="fa fa-external-link"></i></a></span>@endif
                   </span>
                 </div>
@@ -118,16 +118,19 @@
             </div>
             <!-- /.info-box-content -->
         </div>
-    @elseif($item->state != '1' and $item->type and !$item->market)
+                @endif
+    @if($item->type and !$item->market)
                     <div class="info-box bg-green">
                         <span class="info-box-icon"><i class="fa fa-shopping-cart"></i></span>
                         <div class="info-box-content">
                             <div class="form-group pull-left">
+                                @if($item->state != '1')
                                 <div class="input-group">
                                     <div class="input-group-btn"><button class="btn btn-default minus-quantity"><i class="fa fa-chevron-left"></i> </button></div>
                                     <input name="quantity" type="number" min="1" class="form-control" placeholder="{{ trans('rent.quantity') }}"/>
                                     <div class="input-group-btn"><button class="btn btn-default plus-quantity"><i class="fa fa-chevron-right"></i> </button></div>
                                 </div>
+                                @endif
                                 <button style="margin-top: 10px" type="button" class="btn btn-success pull-right cursor-pointer add-to-cart" data-delivery="{{ trans('rent.delivery') }}: {{ $item->market?implode(", ", $item->market->delivery?json_decode($item->market->delivery):trans('rent.no_delivery')):$item->author->delivery?$item->author->delivery:trans('rent.no_delivery') }}" data-name="{{ isset($item->title)?$item->title:$title }}" data-id="{{ $item->id }}" data-price="{{ $item->price }}" data-category-name="{{ $category->name }}" data-category-id="{{ $item->category }}" data-user-id="{{ $item->author->id }}" data-user-name="{{ $item->author->name }}">{{ trans('rent.to_cart') }} </button>
                             </div>
                         </div>
@@ -138,15 +141,6 @@
                     <!-- /.info-box-content -->
                 </div>
         <!-- /.info-box -->
-        <a href="#feedback" onclick="$('#feedback-link').html('<a href=\'/view/{{ $item->id }}\'>{{ $item->title }}</a>')">
-            <div class="info-box bg-red">
-                <span class="info-box-icon"><i class="fa fa-edit"></i></span>
-                <div class="info-box-content">
-                    <span class="pull-right"><i class="fa fa-external-link"></i></span>
-                    <h4>{{ trans('app.problems_feedback_text') }} </h4>
-                </div>
-            </div>
-        </a>
-        <!-- /.info-box -->
+
     </div>
 </div>

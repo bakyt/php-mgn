@@ -22,5 +22,6 @@ class Market extends Model
         'contacts',
         'is_sale',
         'delivery',
+        'type_products'
     ];
 }

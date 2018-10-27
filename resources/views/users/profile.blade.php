@@ -16,7 +16,7 @@
                     <div id="username" class="profile-username" style="line-height: 1em;padding-top: 10px">{{ $user->name }}</div>
                     <p class="text-muted text-left">{{ $user->role_id == 2?trans('app.user'):($user->role_id==1?'Administrator':'Moderator')}}</p>
                     @if($user->me)<div style="width: 100%"><button id="avatar-upload-btn" class="btn btn-box-tool"><i class="fa fa-camera"></i></button><button class="btn btn-box-tool" id="delete-avatar"><i class="fa fa-trash"></i></button></div>@endif
-                    <button title="{{ trans('rent.message') }}" style="position:absolute;bottom: 10px; right: 10px" type="button" value="{{ $user->id }}" id="new-message" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal-message"><b><i class="fa fa-envelope"></i></b></button>
+                    <button title="{{ trans('rent.message') }}" style="position:absolute;bottom: 10px; right: 10px" type="button" value="{{ $user->id }}" id="new-message" class="btn btn-primary btn-sm pull-right disable-scroll" data-toggle="modal" data-target="#modal-message"><b><i class="fa fa-envelope"></i></b></button>
                 </div>
                 <!-- /.box-body -->
             </div>

@@ -25,7 +25,7 @@ class MarketCategory extends AbstractWidget
         $categories = [];
         $market = explode('/', request()->decodedPath())[0];
         $locale = app()->getLocale();
-        $cats = json_decode(Market::all('slug', 'categories')->where('slug', $market)->first()['categories']);
+        $cats = json_decode(Market::all(['slug', 'categories'])->where('slug', $market)->first()['categories']);
         if($cats) {
             if(cache()->has('global_categories')) $category = cache('global_categories');
             else {

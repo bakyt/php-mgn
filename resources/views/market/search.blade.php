@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.market')
 
 @section('content')
     <div class="row">
@@ -38,7 +38,7 @@
                             <a href="{{ route('item.view', $item->id) }}">{{ $item->content->title->$locale }}</a>
                         </h4>
                         <div class="media">
-                            <div class="pull-left ad-click-event" style="position: relative">
+                            <div class="pull-left ad-click-event" style="position: relative;">
 
                                     <img  src="/storage/{{ $item->images[0] }}" alt="MaterialPro" class="media-object" style="margin:auto;max-height: 90px;border-radius: 4px;box-shadow: 0 1px 3px rgba(0,0,0,.15);">
                                 <span class="label label-success">
@@ -96,9 +96,9 @@
                     <div class="col-md-8 col-md-offset-2">
                         <div class="search-page">
                             <div class="col-md-12" style="text-align: center">
-                                <img class="search-logo" src="/storage/default-images/logo.png"/>
+                                <img class="search-logo" src="/storage/{{ $Market->icon }}"/>
                             </div>
-                            @widget('search')
+                            @widget('SearchMarket')
                         </div>
                     </div>
                 </div>

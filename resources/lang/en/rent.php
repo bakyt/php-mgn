@@ -173,5 +173,8 @@ return [
     'ascending'=>'Ascending',
     'by_price'=>'By price',
     'by_date'=>'By date',
-    'sort'=>'Sort'
+    'sort'=>'Sort',
+    'select_type_of_market'=>'Select the type of products you will sell.',
+    'new_products'=>'New products',
+    'secondhand_products'=>'Secondhand products'
 ];

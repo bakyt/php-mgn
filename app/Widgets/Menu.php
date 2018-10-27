@@ -19,7 +19,7 @@ class Menu extends AbstractWidget
      */
     public function run()
     {
-        //
+
 
         return view('widgets.menu', [
             'config' => $this->config,
